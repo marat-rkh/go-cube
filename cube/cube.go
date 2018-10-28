@@ -20,11 +20,11 @@ type Cube struct {
 	pixels [][][]*graphic.Mesh
 }
 
-func (c Cube) SetColor(x, y, z int, color *math32.Color) {
+func (c *Cube) SetColor(x, y, z int, color *math32.Color) {
 	c.pixels[x][y][z].SetMaterial(material.NewPhong(color))
 }
 
-func (c Cube) AddToScene(app *application.Application) {
+func (c *Cube) AddToScene(app *application.Application) {
 	c.pixels = make([][][]*graphic.Mesh, cubeSize)
 	for i := 0; i < cubeSize; i++ {
 		c.pixels[i] = make([][]*graphic.Mesh, cubeSize)
@@ -33,9 +33,9 @@ func (c Cube) AddToScene(app *application.Application) {
 			c.pixels[i][j] = make([]*graphic.Mesh, cubeSize)
 			yPos := startPos + float32(j)*gapPx
 			for k := 0; k < cubeSize; k++ {
-				zPos := startPos + float32(k)*gapPx
+				zPos := -1 * (startPos + float32(k)*gapPx)
 				geom := geometry.NewSphere(pixelSizePx, 32, 32, 0, 2*math32.Pi, 0, 2*math32.Pi)
-				mat := material.NewPhong(math32.NewColor("DarkBlue"))
+				mat := material.NewPhong(math32.NewColor("DimGrey"))
 				mesh := graphic.NewMesh(geom, mat)
 				mesh.SetPosition(xPos, yPos, zPos)
 				app.Scene().Add(mesh)

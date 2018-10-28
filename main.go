@@ -33,6 +33,7 @@ func main() {
 		Height: 600,
 	})
 	app.cube.AddToScene(app.Application)
+	drawPlus(app.cube)
 	app.Subscribe(application.OnBeforeRender, func(eventName string, event interface{}) {
 		app.renderCube()
 	})
@@ -49,4 +50,15 @@ func main() {
 	if err := app.Run(); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func drawPlus(cb cube.Cube) {
+	color := math32.NewColor("YellowGreen")
+	cb.SetColor(1, 1, 0, color)
+	cb.SetColor(1, 0, 1, color)
+	cb.SetColor(0, 1, 1, color)
+	cb.SetColor(1, 1, 1, color)
+	cb.SetColor(2, 1, 1, color)
+	cb.SetColor(1, 2, 1, color)
+	cb.SetColor(1, 1, 2, color)
 }
