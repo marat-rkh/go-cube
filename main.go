@@ -37,16 +37,13 @@ func main() {
 	app.Subscribe(application.OnBeforeRender, func(eventName string, event interface{}) {
 		app.renderCube()
 	})
-	// Add lights to the scene
 	ambientLight := light.NewAmbient(&math32.Color{R: 1.0, G: 1.0, B: 1.0}, 0.8)
 	app.Scene().Add(ambientLight)
-
-	// Add an axis helper to the scene
-	axis := graphic.NewAxisHelper(50)
+	axis := graphic.NewAxisHelper(35)
 	app.Scene().Add(axis)
 
-	app.CameraPersp().SetPosition(0, 0, 150)
-
+	app.CameraPersp().SetPosition(0, 0, -200)
+	app.CameraPersp().SetRotationY(math32.Pi)
 	if err := app.Run(); err != nil {
 		log.Fatal(err)
 	}
